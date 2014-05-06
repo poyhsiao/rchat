@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="kimz">
+  <head>
+    <meta charset="UTF-8">
+    <title>New Hello world</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <script src="/js/angula-init.js"></script>
+    <script src="js/controllers.js"></script>
+  </head>
+  <body ng-controller="resetHelloWorld">
+    <div class="well span12" role="form" ng-dblclick="reset()">
+      <h1>[[ message || "Hello" ]]&nbsp;[[ name || "AngularJS!!" ]]</h1>
+      <hr>
+      <div class="form-group">
+        <label>Message:&nbsp;
+          <input type="text" class="form-control" placeholder="Enter some messages here" ng-model="message">
+        </label>
+      </div>
+      <div class="form-group">
+        <label>Name:&nbsp;
+          <input type="text" class="form-control" placeholder="Enter a name here" ng-model="name">
+        </label>
+      </div>
+    </div>
+  </body>
+</html>

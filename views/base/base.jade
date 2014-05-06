@@ -1,0 +1,87 @@
+doctype default
+html(ng-app="kimz" lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+
+    // optionalMeta start
+    block optionalMeta
+    // optionalMeta end
+
+    // title start
+    block title
+      title Index - online match
+    // title end
+
+    // basicCSS start
+    block basicCSS
+      link(rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css")
+      link(rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css")
+    // basicCSS end
+
+    // extendCSS start
+    block extendCSS
+      //- extendCSS
+    // extendCSS end
+
+    // baseJS start
+    block baseJS
+      script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js")
+      script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-touch.min.js")
+      script(src="/js/angular/angula-init.js")
+      script(src="/js/angular/ui-bootstrap-tpls.min.js")
+      script(src="/js/angular/controllers.js")
+
+      //- script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js")
+      //- script(src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js")
+    // baseJS end
+
+    // wsJS start
+    block wsJS
+      script(src="/js/libs/socket.io.min.js")
+    // wsJS end
+
+    // optionalJS start
+    block optionalJS
+    // optionalJS end
+
+    style.
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0 0;
+      }
+      .center-x {
+        text-align: center;
+      }
+      .center-y {
+        vertical-align: middle;
+      }
+      .vcernter {
+        display: table-cell;
+        vertical-align: middle;
+      }
+    // extendStyle start
+    block extendStyle
+    // extendStyle end
+
+  body
+    // navbar start
+    block navbar
+      header.navbar.navbar-inverse.navbar-static-top.bs-docs-nav(role="banner")
+        .navbar-header
+          a.navbar-brand(href="#") Kimz Environment
+        nav.collapse.navbar-collapse.bs-navbar-collapse(role="navigation")
+          .nav.navbar-nav
+            li
+              a(href="#") Test
+    // navbar end
+    block header
+      // header
+    block content
+      // content
+    block footer
+      // footer
+    block footerJS
+      // footerJS
+

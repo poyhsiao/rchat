@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="kimz">
+  <head>
+    <meta charset="UTF-8">
+    <title>ngShow and ngHide</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <script src="/js/angula-init.js"></script>
+    <script src="js/controllers.js"></script>
+  </head>
+  <body>
+    <div class="well span6" style="margin-top: 20px;" ng-controller="showAndHideCtrl">
+      <div class="form-group">
+        <label>
+          Show?
+          <input type="checkbox" ng-model="isShow">
+        </label>
+      </div>
+      <div class="form-group" ng-show="isShow">
+        <label>
+          Another Question?
+          <input type="checkbox" ng-model="aquestion" ng-true-value="Happy" ng-false-value="unHappy">
+        </label>
+      </div>
+      <hr>
+      <h2 ng-hide="aquestion">還要勾選喔</h2>
+      <h2 ng-show="aquestion">[[ aquestion ]]</h2>
+    </div>
+  </body>
+</html>

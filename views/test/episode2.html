@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app='kimz'>
+  <head>
+    <title>This is the second class</title>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <script src="js/angula-init.js"></script>
+    <script src="js/controllers.js"></script>
+  </head>
+  <body ng-controller='todoCtl'>
+    <h1>Todo list</h1>
+    <form ng-submit="addItem()">
+      <input type="text" name="newItem" ng-model="newItem" />
+      <input type="submit" value="新增" />
+    </form>
+    <ul>
+      <li ng-repeat="item in todoList | orderBy:label">[[ item.label ]]</li>
+    </ul>
+  </body>
+</html>

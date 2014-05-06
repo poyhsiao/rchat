@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="kimz">
+  <head>
+    <meta charset="UTF-8">
+    <title>ngShow and ngHide</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <script src="/js/angula-init.js"></script>
+    <script src="/js/controllers.js"></script>
+    <style>
+    .vcernter {
+    display:table-cell;
+    vertical-align:middle;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="row" ng-controller="nepi4">
+      <div class="col-md-offset-4 col-md-4 well">
+        <div class="alert alert-info vcenter" ng-init="greeting='Hola';name='Hello';">
+          <div role="form">
+            <div class="form-group">
+              <div class="well">
+                <label>Check All?
+                  <input type="checkbox" ng-model="selAll">
+                </label>
+                <input type="text" class="btn btn-primary" value="Yes" ng-click="selectAll()">
+              </div>
+              <br>
+              <label for="greeting">Greeting</label>
+              <div class="input-group">
+                <span class="input-group-addon">
+                <input type="checkbox" ng-checked="selAll">
+                </span>
+                <input type="text" ng-model="greeting" placeholder="Enter a message here" class="form-control" id="greeting">
+                <span class="input-group-btn">
+                <button class="btn btn-primary">Greeting add</button>
+                </span>
+              </div>
+              <br>
+              <label for="name">Name</label>
+              <div class="input-group">
+                <span class="input-group-addon">
+                <input type="checkbox" ng-checked="selAll">
+                </span>
+                <input type="text" ng-model="name" placeholder="Enter your name here" class="form-control" id="name">
+                <span class="input-group-btn">
+                <button class="btn btn-primary">Name add</button>
+                </span>
+              </div>
+              <br>
+              <label for="textinfo">Text Here</label>
+              <div class="input-group">
+                <span class="input-group-addon">
+                <label>Writable?
+                  <input type="checkbox" ng-model="nreadonly">
+                </label>
+                </span>
+                <textarea name="textinfo" id="textinfo" cols="30" rows="10" ng-model="textinfo" ng-readonly="nreadonly"></textarea>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <h1>[[ greeting ]]&nbsp;[[ name ]]</h1>
+          <div>[[ textinfo ]]</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

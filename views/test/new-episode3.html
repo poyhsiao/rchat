@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html ng-app="kimz">
+  <head>
+    <meta charset="UTF-8">
+    <title>ngShow and ngHide</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <script src="/js/angula-init.js"></script>
+    <script src="js/controllers.js"></script>
+    <style>
+      .friend-first {
+        color: red;
+      }
+      .friend-middle {
+        color: green;
+      }
+      .friend-last {
+        color: blue;
+      }
+      .friend-odd {
+        color: gray;
+      }
+      .friend-even {
+        color: yellow;
+      }
+      .vcernter {
+        display:table-cell;
+        vertical-align:middle;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="well col-md-12" style="margin-top: 20px;" ng-controller="friendCtrl">
+      <div role="form" style="margin-bottom: 20px;">
+        <div class="form-group">
+          <label class="control-label">
+            Name:&nbsp;
+            <input type="text" ng-model="nName" placeholder="Name">
+          </label>
+        </div>
+        <div class="form-group">
+          <label class="control-label">
+            Age:&nbsp;
+            <input type="number" ng-model="nAge" placeholder="Age">
+          </label>
+        </div>
+        <br>
+        <button class="btn btn-primary" ng-click="addFriend()">Add</button>
+      </div>
+      <hr>
+      <div role="form">
+        <div class="form-group">
+          <label>
+            Filter:&nbsp;
+            <input type="text" ng-model="search" placeholder="filter">
+          </label>
+        </div>
+      </div>
+      <hr>
+      <div role="form" class="col-md-3">
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-addon">
+              <label for="limiter">Limit&nbsp;<i class="glyphicon glyphicon-warning-sign"></i></label>
+            </div>
+            <input type="number" ng-model="limit" placeholder="number of limit" class="form-control" id="limiter">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h5>總數：[[ nu ]]</h5>
+        </div>
+        <div class="col-md-12">
+          <ul>
+            <li ng-repeat="friend in friends | filter:search | limitTo:limit">
+              <h2>
+                <span ng-show="$even" style="color: gray;">[[ friend.name ]]</span>
+                <span ng-show="$odd" style="color: yellow;">[[ friend.name ]]</span>
+              </h2>
+              <div class="alert alert-info">
+                <span ng-hide="friend.editing">
+                  <span ng-click="sort('name')">[[ friend.name ]]&nbsp;</span>
+                  <span ng-click="sort('age')" class="badge" style="background: red;">[[ friend.age | currency:"NT$" ]]歲</span>&nbsp;
+                  <div class="pull-right vcernter">
+                    <button class="btn" type="button" ng-click="remove(friend)"><i class="glyphicon glyphicon-trash"></i></button>
+                    <button class="btn" type="button" ng-click="edit(friend)"><i class="glyphicon glyphicon-edit"></i></button>
+                  </div>
+                </span>
+                <span ng-show="friend.editing">
+                  <form ng-submit="set(friend)">
+                    <input type="text" ng-model="friend.name" ng-model-onblur>
+                    <input type="number" ng-model="friend.age" ng-model-onblur>
+                    <button class="btn btn-error" type="submit">修改</button>
+                  </form>
+                </span>
+              </div>
+              <div class="progress progress-striped active" ng-repeat-end>
+                <div class="progress-bar" style="width: [[ friend.age ]]%"></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

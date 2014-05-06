@@ -1,0 +1,31 @@
+{
+  "name": "online_match",
+  "main": "index.js",
+  "version": "0.0.0",
+  "authors": [
+    "kimhsiao <kimhsiao@nownews.com>"
+  ],
+  "description": "It is online match service web service",
+  "keywords": [
+    "match",
+    "social",
+    "api",
+    "friends",
+    "chatroom"
+  ],
+  "license": "BSD",
+  "homepage": "http://blog.giiko.net",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "socket.io-client": "~0.9.16",
+    "angular-bootstrap": "~0.11.0",
+    "jquery": "1",
+    "bootstrap": "~3.1.1"
+  }
+}

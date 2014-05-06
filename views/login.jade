@@ -1,0 +1,20 @@
+extends ./base/base
+
+block content
+  .container(ng-controller="checkLogin")
+    .row
+      .col-md-6.col-md-offset-3.alert.alert-info
+        .info
+          form(action="/login",name="login",role="form",method="post")
+            .well
+              .form-group
+                label(for="username") Username:
+                input#username.form-control(type="text",placeholder="Email / Username",name="username")
+              .form-group
+                label(for="password") Passord:
+                input#password.form-control(type="password",placeholder="Passord",name="password")
+            hr
+            .center-x.input-group-btn
+              button.btn.btn-success(type="button",ng-click="doRegister()") Register
+              button.btn.btn-primary(type="submit") Login
+              button.btn.btn-danger(type="reset") Reset

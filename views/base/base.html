@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="kimz">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ s.locals.token }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    {% block optionalMETA%}{% endblock %}
+    {% block title %}
+    <title>Index - online match</title>
+    {% endblock %}
+    {% block basicCSS %}
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    {% endblock %}
+    {% block extendCSS %}{% endblock %}
+    {% block baseJS %}
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <script src="/js/angular/angula-init.js"></script>
+    <script src="/js/angular/ui-bootstrap-tpls.min.js"></script>
+    <script src="/js/angular/controllers.js"></script>
+    {% endblock %}
+    {% block wsJS %}
+    <script src="/js/libs/socket.io.min.js"></script>
+    {% endblock %}
+    {% block optionalJS %}{% endblock %}
+    <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0 0;
+    }
+    center-x {
+      text-align: center;
+    }
+    center-y {
+      vertical-align: middle;
+    }
+    .vcernter {
+      display:table-cell;
+      vertical-align:middle;
+    }
+    </style>
+  </head>
+  <body>
+    {% block navbar %}
+    <header class="navbar navbar-inverse navbar-static-top bs-docs-nav" role="banner">
+      <div class="navbar-header">
+        <a href="#" class="navbar-brand">Kimz Environment</a>
+      </div>
+      <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+        <div class="nav navbar-nav">
+          <li><a href="#">Test</a></li>
+        </div>
+      </nav>
+    </header>
+    {% endblock %}
+
+    {% block header %}{% endblock %}
+    {% block content %}{% endblock %}
+    {% block footer %}{% endblock %}
+    {% block footerJS %}{% endblock %}
+  </body>
+</html>
