@@ -58,9 +58,36 @@ module.exports = {
    * @return {Object}        Will reload page if fail or redirect vaildate page
    */
   register: function (req, res, next) {
-    res.render('register', {
-      d: req
+    var mongoose = require('mongoose'),
+      userModel = mongoose.model('user');
+
+    userModel.find({username: 'kimhsiao'}, function(err, dat) {
+      if(err) {
+        console.error(err);
+        return ;
+      }
+      console.dir(dat);
     });
+
+    var kim = new userModel({
+      username: 'kimhsiao',
+      password: '1234',
+      nickname: 'Kim',
+      gender: true,
+      birthday: '1979/05/24'
+    });
+
+    kim.save(function (err) {
+      if (err) {
+        console.error(err);
+        return false;
+      }
+
+      res.render('register', {
+        d: req
+      });
+    });
+
   },
 
   /**
@@ -71,7 +98,9 @@ module.exports = {
    * @return {Object}        Only process register information will return default page when success or go back to register display page
    */
   registered: function (req, res, next) {
-
+    var mongoose = require('mongoose'),
+      userSchema = mongoose.model('user', user);
+    console.dir(userSchema);
   },
 
   /**

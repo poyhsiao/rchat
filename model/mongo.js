@@ -4,7 +4,6 @@
  */
 module.exports = function () {
   var mongoose = require('mongoose'),
-    _schema = mongoose.Schema,
     db;
 
   require(conf.path.model + '/model')(mongoose);

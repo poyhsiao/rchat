@@ -69,3 +69,53 @@ function checkLogin($scope, $filter) {
     return window.location.href = '/register';
   }
 }
+
+function doRegister($scope, $http) {
+  $scope.error = false; /* password and chkpass is dismatched ? */
+  $scope.showme = false; /* display password */
+  $scope.pwd = 'password'; /* default password field is password or text*/
+
+  $scope.checkData = function (opt) {
+    var valObj = ['account', 'name', 'password', 'chkpass'];
+    console.dir(opt);
+
+    if ('all' === opt || 'password' === opt) {
+      chkpass();
+    }
+
+    function chkpass() {
+      if ($scope.user.password !== $scope.user.chkpass) {
+        $scope.error = true;
+        return false;
+      } else {
+        $scope.error = false;
+        return false;
+      }
+    }
+  };
+
+  $scope.changePWD = function () {
+    if ('password' === $scope.pwd) {
+      return $scope.pwd = 'text';
+    } else {
+      return $scope.pwd = 'password';
+    }
+  };
+
+  $scope.submitForm = function (form) {
+    alert(form.$valid);
+    return false;
+  };
+
+  $scope.today = function () {
+    $scope.today = new Date();
+  }
+  $scope.today();
+
+  $scope.openCal = function ($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+
+    $scope.opened = true;
+  };
+}
