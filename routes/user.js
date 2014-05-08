@@ -61,33 +61,19 @@ module.exports = {
     var mongoose = require('mongoose'),
       userModel = mongoose.model('user');
 
-    userModel.find({username: 'kimhsiao'}, function(err, dat) {
-      if(err) {
-        console.error(err);
-        return ;
-      }
-      console.dir(dat);
-    });
-
-    var kim = new userModel({
-      username: 'kimhsiao',
-      password: '1234',
-      nickname: 'Kim',
-      gender: true,
-      birthday: '1979/05/24'
-    });
-
-    kim.save(function (err) {
+    userModel.find({
+      username: 'kimhsiao'
+    }, function (err, dat) {
       if (err) {
         console.error(err);
-        return false;
+        return;
       }
-
-      res.render('register', {
-        d: req
-      });
     });
 
+    res.render('register', {
+      r: res,
+      d: req
+    });
   },
 
   /**
@@ -99,8 +85,77 @@ module.exports = {
    */
   registered: function (req, res, next) {
     var mongoose = require('mongoose'),
-      userSchema = mongoose.model('user', user);
-    console.dir(userSchema);
+      userSchema = mongoose.model('user'),
+      keys = ['username', 'nickname', 'password', 'gender', 'birthdate'],
+      rest = null,
+      that = this;
+
+    rest = util._.difference(keys, util._.keys(req.body));
+
+    util.flow.exec(
+      function () {
+        if (util._.isArray(rest)) {
+          if (rest.length > 0) { /* some data is insufficient */
+            console.error('cannot tell the upload data');
+            return that.register(req, res, next); /* return back to register page */
+          } else {
+            this();
+          }
+        } else {
+          /* some error occured */
+          console.error('Register data is not correct');
+          return that.register(req, res, next); /* return back to register page */
+        }
+      },
+
+      function () { /* check if username or nickname is existed in db */
+        var me = this;
+        checkAccount([{
+          'username': req.body.username
+        }, {
+          'nickname': req.body.nickname
+        }], function (o) {
+          if (false === o) {
+            var msg = 'Username or nickname exists';
+            console.log(msg);
+            req['errorMSG'] = [{
+              message: msg
+            }];
+          }
+        });
+        this();
+      },
+
+      function () {
+        if (util._.has(req, 'errorMSG')) {
+          return this();
+        } else {
+          console.dir(rest);
+          var obj = {}; /* clean object for store */
+          keys.forEach(function (v, k) {
+            console.log(v);
+            obj[v] = req.body[v];
+          });
+
+          var user = new userSchema(obj);
+          user.save(function (err) {
+            if (err) {
+              console.log('fail to add new user');
+              cosnole.error(err);
+            }
+          });
+          this();
+        }
+      },
+
+      function () {
+        if (util._.has(req, 'errorMSG')) {
+          module.exports.register(req, res);
+        } else {
+          res.redirect('/');
+        }
+      }
+    );
   },
 
   /**
@@ -114,3 +169,37 @@ module.exports = {
 
   }
 };
+
+/**
+ * Check if account/nickname is exist in db
+ * @param  {Array}   account {username/nickname: value}
+ * @param  {Function} next    callback function, and if the parameter is true then the account is available
+ * @return {Function}         will return callback function
+ */
+function checkAccount(account, next) {
+  var mongoose = require('mongoose'),
+    userModel = mongoose.model('user');
+  if (util._.isArray(account)) {
+    if (account > 1) {
+      cond = userModel.findOne({
+        "$or": account
+      });
+    } else {
+      cond = userModel.findOne(account[0]);
+    }
+
+    cond.exec(function (err, dat) {
+      if (err) {
+        console.error(err);
+        return next(false);
+      }
+      if (null !== dat) {
+        return next(false);
+      } else {
+        return next(true);
+      }
+    });
+  } else {
+    return next(false);
+  }
+}

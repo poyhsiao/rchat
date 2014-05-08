@@ -3,37 +3,41 @@ extends base/base
 block content
   .container(ng-controller="doRegister")
     .row
-      .col-md-6.col-md-offset-3.alert.alert-warning
+      .col-md-6.col-md-offset-3.alert.alert-info
         .info
+          if d.errorMSG
+            each v in d.errorMSG
+              .alert.alert-danger #{v.message}
           form(action="/register",name="register",method="post",role="form",ng-submit="submitForm(register)")
             .alert.alert-danger(ng-show="register.$valid") Please check your register information
-            .form-group.well
+            .form-group.alert.alert-success
               label(for="account") Account
-              input#account.form-control(type="email",placeholder="Please enter your email",name="account",ng-model="user.account",required)
-            .form-group.well
+              input#account.form-control(type="email",placeholder="Please enter your email",name="username",ng-model="user.username",ng-required="true")
+            .form-group.alert.alert-success
               label(for="name") Display name
-              input#name.form-control(type="text",placeholder="Please enter your name to display",name="name",ng-model="user.name",required)
-            .form-group.well
+              input#name.form-control(type="text",placeholder="Please enter your name to display",name="nickname",ng-model="user.nickname",ng-required="true")
+            .form-group.alert.alert-success
               label(for="password") Password
               .input-group
-                input#password.form-control(type="[[ pwd ]]",placeholder="Please enter your password",name="password",ng-model="user.password",ng-change="checkData('password')",required)
+                input#password.form-control(type="[[ pwd ]]",placeholder="Please enter your password",name="password",ng-model="user.password",ng-change="checkData('password')",ng-required="true")
                 span.input-group-addon.btn.alert-info
                   label
                     input(type="checkbox",ng-change="changePWD()",ng-model="showme")
                     span &nbsp;show me
               .alert.alert-danger(ng-show="error") Password is not matched
               label(for="chkpass") Re-type password
-              input#chkpass.form-control(type="[[ pwd ]]",placeholder="Please enter your password again",ng-model="user.chkpass",ng-change="checkData('password')",required)
-            .form-group.well
+              input#chkpass.form-control(type="[[ pwd ]]",placeholder="Please enter your password again",ng-model="user.chkpass",ng-change="checkData('password')",ng-required="true")
+            .form-group.alert.alert-success
               label Gender
               br
               label Male
                 input(type="radio",name="gender",value="1",ng-model="user.gender")
               label Female
                 input(type="radio",name="gender",value="0",ng-model="user.gender")
-            .form-group.well
+            .form-group.alert.alert-success
               label(for="birthdate") Birth date
-              input#birthdate.form-control(type="date",name="birthdate",placeholder="[[ today | date:'yyyy/MM/dd' ]]",ng-model="user.birthdate",datepicker-popup="yyyy/MM/dd",is-open="opened",min-date="2014",datepicker-options="dateOptions",date-disabled="disabled(date, mode)",ng-required="true",ng-focus="openCal($event)",ng-click="openCal($event)",readonly="readonly",required)
+              input#birthdate.form-control(type="date",name="birthdate",placeholder="[[ today | date:'yyyy/MM/dd' ]]",ng-model="user.birthdate",datepicker-popup="yyyy/MM/dd",is-open="opened",min-date="2014",datepicker-options="dateOptions",date-disabled="disabled(date, mode)",ng-required="true",ng-focus="openCal($event)",ng-click="openCal($event)",readonly="readonly")
+              input(type="hidden",name="_csrf",value=csrf,ng-modle="user.csrf")
             hr
             pre [[ user|json ]]
             pre [[ user.birthdate | date:'yyyy/MM/dd' ]]

@@ -34,7 +34,9 @@ module.exports = function (app, express) {
   }));
   app.use(express.csrf());
   app.use(function (req, res, next) {
-    res.header('X-CSRF-Token', req.csrfToken()); /* add csrf feature in response header */
+    var token = req.csrfToken();
+    res.locals.csrf = token;
+    res.header('X-CSRF-Token', token); /* add csrf feature in response header */
     next();
   });
   app.use(function (req, res, next) {
